@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>爱游戏 · 稳定入口与说明</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f5fafb;
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.65;
+            color: #1b2f2e;
+            padding: 24px 16px 48px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-grid {
+            max-width: 760px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        /* 文章标题区 */
+        .article-header {
+            border-left: 5px solid #2b9b8e;
+            padding-left: 18px;
+            margin-bottom: 4px;
+        }
+
+        .article-header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            color: #10423d;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .article-header .meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.85rem;
+            color: #4e736e;
+            border-bottom: 1px solid #d1e3df;
+            padding-bottom: 12px;
+        }
+
+        .meta span {
+            background: #e1f0ed;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: #175a52;
+        }
+
+        /* 导语 */
+        .lead {
+            font-size: 1.1rem;
+            background: #eef7f5;
+            padding: 20px 24px;
+            border-radius: 18px;
+            color: #174e48;
+            border: 1px solid #c8dfda;
+            box-shadow: 0 2px 6px rgba(28, 87, 79, 0.04);
+            margin: 8px 0 4px;
+        }
+
+        .lead strong {
+            color: #14645a;
+            font-weight: 600;
+        }
+
+        /* 正文卡片网格 */
+        .card-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 22px 24px 24px;
+            box-shadow: 0 6px 14px rgba(30, 80, 73, 0.04), 0 0 0 1px #dcece8;
+            transition: box-shadow 0.2s;
+        }
+
+        .card:hover {
+            box-shadow: 0 8px 18px rgba(28, 87, 78, 0.06), 0 0 0 1px #b6d5ce;
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            color: #0b463f;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h2::before {
+            content: "";
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background: #2b9b8e;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .card p {
+            margin-bottom: 12px;
+            color: #2d4d48;
+        }
+
+        .card p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight {
+            background: #def1ed;
+            border-left: 4px solid #2b9b8e;
+            padding: 14px 18px;
+            border-radius: 0 14px 14px 0;
+            font-size: 0.95rem;
+            color: #124a42;
+            margin: 16px 0 6px;
+        }
+
+        .highlight a {
+            color: #08574c;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #7bbbb1;
+            font-weight: 500;
+        }
+
+        .highlight a:hover {
+            color: #033d35;
+            text-decoration-color: #175a50;
+        }
+
+        .list-slim {
+            list-style: none;
+            padding: 0;
+            margin: 12px 0 0;
+        }
+
+        .list-slim li {
+            padding: 6px 0 6px 22px;
+            position: relative;
+            color: #1e4b44;
+            font-size: 0.95rem;
+        }
+
+        .list-slim li::before {
+            content: "·";
+            position: absolute;
+            left: 6px;
+            color: #2b9b8e;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .faq-item {
+            border-bottom: 1px solid #d6e7e2;
+            padding: 14px 0;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item strong {
+            display: block;
+            color: #104b42;
+            font-weight: 600;
+            margin-bottom: 3px;
+        }
+
+        .faq-item p {
+            margin: 2px 0 0;
+            color: #2b554e;
+            font-size: 0.95rem;
+        }
+
+        /* 引用提示 */
+        .notice-quote {
+            background: #f3faf8;
+            border-radius: 30px;
+            padding: 20px 24px;
+            border: 1px solid #bed9d2;
+            color: #175249;
+            font-style: normal;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin: 6px 0 2px;
+        }
+
+        .notice-quote .quote-icon {
+            font-size: 1.6rem;
+            line-height: 1;
+            color: #2b9b8e;
+            opacity: 0.7;
+        }
+
+        .notice-quote p {
+            margin: 0;
+        }
+
+        .notice-quote a {
+            color: #0d5b4f;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #87c2b8;
+        }
+
+        /* 访问句 — 自然收束 */
+        .closing-line {
+            background: #ffffff;
+            border-radius: 40px;
+            padding: 20px 24px;
+            text-align: center;
+            border: 1px dashed #a2cbc2;
+            color: #175a50;
+            font-size: 1rem;
+            margin-top: 6px;
+        }
+
+        .closing-line a {
+            color: #095146;
+            font-weight: 600;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-color: #72b3a8;
+        }
+
+        .closing-line a:hover {
+            color: #02342d;
+            text-decoration-color: #045046;
+        }
+
+        .footer-note {
+            font-size: 0.8rem;
+            color: #5d7e78;
+            text-align: center;
+            border-top: 1px solid #d1e3df;
+            padding-top: 20px;
+            margin-top: 16px;
+        }
+
+        /* 移动端微调 */
+        @media (max-width: 480px) {
+            body {
+                padding: 16px 12px 40px;
+            }
+            .article-header h1 {
+                font-size: 1.6rem;
+            }
+            .lead {
+                padding: 16px 18px;
+                font-size: 1rem;
+            }
+            .card {
+                padding: 18px 16px 20px;
+                border-radius: 20px;
+            }
+            .highlight {
+                padding: 12px 14px;
+            }
+            .notice-quote {
+                padding: 16px 18px;
+            }
+            .closing-line {
+                padding: 16px 14px;
+            }
+        }
+
+        @media (min-width: 600px) {
+            .card-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 18px;
+            }
+            .card-grid .card:last-of-type {
+                grid-column: 1 / -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-grid">
+        <!-- 文章标题 -->
+        <div class="article-header">
+            <h1>爱游戏 · 稳定入口与页面说明</h1>
+            <div class="meta">
+                <span>介绍 · 指南</span>
+                <span>2025 · 04</span>
+            </div>
+        </div>
+
+        <!-- 导语 -->
+        <div class="lead">
+            <strong>写在前头</strong> —— 很多时候我们只是想找个安静、靠谱的地方，打开熟悉的页面，不绕路、不迷路。下面聊聊关于 <a href="https://china-vip-igame.com" style="color:#08574c;text-decoration:underline;text-underline-offset:3px;text-decoration-color:#7bbbb1;">爱游戏</a> 的一些日常使用感受和站点结构，权当一份朴实的小手册。
+        </div>
+
+        <!-- 正文卡片网格 (多段) -->
+        <div class="card-grid">
+            <div class="card">
+                <h2>从稳定入口开始</h2>
+                <p>每次想找某个游戏资讯或社区内容，最怕遇到链接失效、页面半天打不开。我习惯直接存好常用的地址，比如 <a href="https://china-vip-igame.com" style="color:#08574c;text-decoration:underline;text-underline-offset:2px;">爱游戏</a> 的主页，加载挺利落，布局也清爽，不会塞一堆弹窗。如果你也是那种“打开即用、用完即走”的性格，这个入口会很对味。</p>
+                <p>站点整体响应速度不错，在手机和电脑上排版没有奇怪错位，至少我用了这段时间没遇到图片撑破边界的情况。</p>
+            </div>
+            <div class="card">
+                <h2>页面结构小记</h2>
+                <p>首页内容分区比较清晰：导航区直达几个常用模块，中间是更新的资讯卡片，往下能看到热门或推荐条目。没有过度设计，找东西基本靠直觉。我特别喜欢它左侧保留的简洁栏目，不晃眼。</p>
+                <p>如果你第一次来，建议花一两分钟拖拽浏览一下，大体就能摸清内容脉络。没有复杂的注册门槛，大部分功能直接可见。</p>
+            </div>
+            <div class="card">
+                <h2>日常使用场景</h2>
+                <ul class="list-slim">
+                    <li>午休时翻翻新上线的游戏动态，看看截图和短评</li>
+                    <li>和朋友聊到某款老作品，直接搜名字找资料或社区讨论</li>
+                    <li>偶尔看看活动预告，提前记下时间，不凑热闹但也不错过</li>
+                    <li>用手机浏览器打开，页面自适应，字体大小刚好，不用双指缩放</li>
+                </ul>
+                <div class="highlight" style="margin-top:12px;">
+                    💡 一个小习惯：把 <a href="https://china-vip-igame.com">爱游戏</a> 添加到手机主屏幕，像打开一个本地应用一样，省去每次输入网址的工夫。
+                </div>
+            </div>
+        </div>
+
+        <!-- 引用提示区块 -->
+        <div class="notice-quote">
+            <div class="quote-icon">❝</div>
+            <p><strong>关于访问的一点说明</strong> —— 页面内容基于网站实际布局和日常使用体验整理，所有描述均来自真实浏览感受。网站本身并不需要特殊设置即可访问，保持网络通畅就行。如果你碰到加载慢的情况，可以先检查本地网络，或者稍后再试。</p>
+            <p>另外，网站的栏目和内容会随着运营更新而调整，上面的介绍对应的是近期版本，长期来看可能会有细微变化，但整体入口和主体功能一直很稳定。</p>
+        </div>
+
+        <!-- FAQ 摘要 (简洁) -->
+        <div class="card" style="margin-top:0;">
+            <h2>常见疑问摘要</h2>
+            <div class="faq-item">
+                <strong>需要注册才能浏览吗？</strong>
+                <p>大部分内容公开可见，部分互动或个性化功能可能需要简单注册，流程很快，没有冗余步骤。</p>
+            </div>
+            <div class="faq-item">
+                <strong>移动端体验如何？</strong>
+                <p>适配做得不错，按钮和链接间距足够，不易误触，横竖屏都能正常阅读。</p>
+            </div>
+            <div class="faq-item">
+                <strong>有没有强制跳转或弹窗？</strong>
+                <p>我几次使用都没遇到强制跳转，也没有遮屏广告。偶尔底部有 banner，但不影响主要内容。</p>
+            </div>
+        </div>
+
+        <!-- 访问句 (收束) -->
+        <div class="closing-line">
+            <span>如果你也喜欢干净、直接的浏览体验，不妨把 </span>
+            <a href="https://china-vip-igame.com">爱游戏</a>
+            <span> 放进收藏夹，随时回来看看。</span>
+        </div>
+
+        <!-- 页脚 -->
+        <div class="footer-note">
+            <span>基于页面实际体验 · 内容仅供参考  · 保持连接</span>
+        </div>
+    </div>
+</body>
+</html>
